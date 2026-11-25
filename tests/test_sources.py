@@ -21,6 +21,9 @@ NEW = "2026-12-02T12:00:00Z"
 
 class SourceTests(unittest.TestCase):
     def setUp(self):
+        sleeper = patch.object(watch.time, "sleep")
+        self.sleep = sleeper.start()
+        self.addCleanup(sleeper.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
@@ -28,6 +31,50 @@ class SourceTests(unittest.TestCase):
                        "maximum_download_bytes": 1024,
                        "sources": [{"id": "example", "name": "Example", "resources": [copy.deepcopy(RESOURCE)]}]}
         self.write_config()
+
+    def test_transient_wrong_body_retries_only_failed_resource(self):
+        responses = iter([watch.SourceBody(b'<html><title>Temporarily unavailable</title></html>', status=200, content_type='text/html'), PAGE])
+        digest, attempts = watch.check_resource(RESOURCE, self.config, lambda *_: next(responses))
+        self.assertEqual(digest, watch.fingerprint(RESOURCE, PAGE))
+        self.assertEqual(attempts, 2)
+        self.sleep.assert_called_once_with(1)
+
+    def test_retry_budget_is_bounded_and_preserves_useful_diagnostics(self):
+        raw = watch.SourceBody(b'<html><title>Service unavailable</title></html>', status=200, content_type='text/html')
+        count = 0
+        def bad(*_):
+            nonlocal count
+            count += 1
+            return raw
+        with self.assertRaises(watch.SourceCheckError) as raised:
+            watch.check_resource(RESOURCE, self.config, bad)
+        self.assertEqual(count, 3)
+        self.assertEqual(raised.exception.attempts, 3)
+        self.assertIn('HTTP 200; type=text/html', str(raised.exception))
+        self.assertIn('bytes=47', str(raised.exception))
+        self.assertIn('sha256=', str(raised.exception))
+        self.assertIn("title='Service unavailable'", str(raised.exception))
+        self.assertEqual(self.sleep.call_count, 2)
+
+    def test_explicit_challenge_and_forbidden_are_never_retried(self):
+        challenge = b'<html><title>Verify you are human</title>CAPTCHA</html>'
+        with self.assertRaisesRegex(watch.SourceCheckError, 'Access wall; no retry') as raised:
+            watch.check_resource(RESOURCE, self.config, lambda *_: challenge)
+        self.assertEqual(raised.exception.attempts, 1)
+        self.sleep.assert_not_called()
+        def forbidden(*_):
+            raise watch.HTTPError(RESOURCE['url'], 403, 'Forbidden', {}, None)
+        with self.assertRaisesRegex(watch.SourceCheckError, 'Access wall; no retry'):
+            watch.check_resource(RESOURCE, self.config, forbidden)
+        self.sleep.assert_not_called()
+
+    def test_long_retry_after_is_left_for_a_later_check(self):
+        def limited(*_):
+            raise watch.HTTPError(RESOURCE['url'], 429, 'Too Many Requests', {'Retry-After': '60'}, None)
+        with self.assertRaises(watch.SourceCheckError) as raised:
+            watch.check_resource(RESOURCE, self.config, limited)
+        self.assertEqual(raised.exception.attempts, 1)
+        self.sleep.assert_not_called()
 
     def write_config(self):
         watch.atomic_json(self.root / "config/sources.json", self.config)

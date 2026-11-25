@@ -9,12 +9,70 @@ import json
 from pathlib import Path
 import re
 import tempfile
+import time
+from urllib.error import HTTPError
 from urllib.parse import urljoin, urlsplit
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_AGENT = "ClamCounter-SourceWatch/1.0 (+https://coolcode.ca/clamcounter/)"
 IDENTIFIER = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+
+
+class SourceBody(bytes):
+    """Public response metadata for useful diagnostics without storing full pages."""
+    def __new__(cls, raw, **metadata):
+        value = super().__new__(cls, raw)
+        value.metadata = metadata
+        return value
+
+
+class SourceCheckError(ValueError):
+    def __init__(self, message, attempts):
+        super().__init__(message)
+        self.attempts = attempts
+
+
+def response_diagnostic(raw):
+    if raw is None:
+        return "no response body"
+    text = raw[:100_000].decode("utf-8", errors="replace")
+    title = re.search(r"<title[^>]*>(.*?)</title>", text, re.I | re.S)
+    title = " ".join(re.sub(r"<[^>]+>", "", title.group(1)).split())[:100] if title else "(none)"
+    metadata = getattr(raw, "metadata", {})
+    return (f"HTTP {metadata.get('status', '?')}; type={metadata.get('content_type', '?')}; "
+            f"bytes={len(raw)}; sha256={sha256(raw).hexdigest()}; title={title!r}")
+
+
+def blocked_response(raw):
+    if raw is None:
+        return False
+    text = raw[:100_000].decode("utf-8", errors="replace").casefold()
+    return any(marker in text for marker in (
+        "captcha", "verify you are human", "checking your browser", "access denied",
+        "<title>just a moment", "enable javascript and cookies to continue",
+        "please wait while your request is being verified", "<title>imunify360",
+        "performing security verification", "complete the security check", "prove you are human",
+    ))
+
+
+def check_resource(resource, config, fetcher):
+    """One check plus at most two ordinary retries; never retry an access wall."""
+    for attempt in range(1, 4):
+        raw = None
+        try:
+            raw = fetcher(resource, config)
+            return fingerprint(resource, raw), attempt
+        except (OSError, ValueError, UnicodeError) as error:
+            access_wall = blocked_response(raw) or (isinstance(error, HTTPError) and error.code in (401, 403))
+            permanent_http = isinstance(error, HTTPError) and error.code < 500 and error.code not in (408, 429)
+            retry_after = error.headers.get("Retry-After", "") if isinstance(error, HTTPError) and error.headers else ""
+            # A long server-requested pause belongs to a later scheduled check.
+            long_pause = bool(retry_after) and (not retry_after.isdigit() or int(retry_after) > 4)
+            if access_wall or permanent_http or long_pause or attempt == 3:
+                label = "Access wall; no retry" if access_wall else f"Failed after {attempt} attempt(s)"
+                raise SourceCheckError(f"{label}: {error}; {response_diagnostic(raw)}", attempt) from error
+            time.sleep(max(attempt, int(retry_after) if retry_after.isdigit() else 0))
 
 
 def normalized(value):
@@ -102,9 +160,10 @@ def fetch(resource, config):
         raw = response.read(config["maximum_download_bytes"] + 1)
         if response.status != 200:
             raise ValueError(f"HTTP {response.status}")
+        metadata = {"status": response.status, "content_type": getattr(response, "headers", {}).get("Content-Type", "unknown")}
     if not raw or len(raw) > config["maximum_download_bytes"]:
         raise ValueError("Empty or oversized source response")
-    return raw
+    return SourceBody(raw, **metadata)
 
 
 def fingerprint(resource, raw):
@@ -160,7 +219,7 @@ def watch(root=ROOT, *, accept_reviewed=False, reviewed_at=None, fetcher=fetch, 
     prior = {source["id"]: source for source in previous.get("sources", [])}
     results, failed = [], False
     with ThreadPoolExecutor(max_workers=4) as pool:
-        pending = {(source["id"], resource["id"]): pool.submit(fetcher, resource, config)
+        pending = {(source["id"], resource["id"]): pool.submit(check_resource, resource, config, fetcher)
                    for source in config["sources"] for resource in source["resources"]}
         for source in config["sources"]:
             identity = source["id"]
@@ -172,17 +231,17 @@ def watch(root=ROOT, *, accept_reviewed=False, reviewed_at=None, fetcher=fetch, 
                 item = {"id": resource["id"], "url": resource["url"], "attempted_at": now}
                 old = old_resources.get(resource["id"], {})
                 try:
-                    digest = fingerprint(resource, pending[identity, resource["id"]].result())
+                    digest, attempts = pending[identity, resource["id"]].result()
                     reference = accepted.get("resources", {}).get(resource["id"])
                     # Baselines include URLs and selectors so config edits require
                     # review even if the returned bytes happen to be identical.
                     definition = sha256(json.dumps(resource, sort_keys=True).encode()).hexdigest()
                     matches = reference and reference.get("sha256") == digest and reference.get("definition_sha256") == definition
-                    item.update(status="ok" if matches else "needs_review", checked_at=now,
+                    item.update(status="ok" if matches else "needs_review", checked_at=now, attempts=attempts,
                                 sha256=digest, definition_sha256=definition)
                 except Exception as error:
                     failed = True
-                    item.update(status="error", checked_at=old.get("checked_at"),
+                    item.update(status="error", checked_at=old.get("checked_at"), attempts=getattr(error, "attempts", 1),
                                 sha256=old.get("sha256"), error=f"{type(error).__name__}: {error}"[:400])
                 resources.append(item)
             state = "error" if any(item["status"] == "error" for item in resources) else (
