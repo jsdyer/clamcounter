@@ -138,11 +138,18 @@ class SourceTests(unittest.TestCase):
             watch.fingerprint(RESOURCE, PAGE.replace(b"Next dish", b"Changed heading"))
         with self.assertRaisesRegex(ValueError, "PNG"):
             watch.fingerprint({"kind": "png"}, PAGE)
+        with self.assertRaisesRegex(ValueError, "JPEG"):
+            watch.fingerprint({"kind": "jpeg"}, PAGE)
+        with self.assertRaisesRegex(ValueError, "JPEG"):
+            watch.fingerprint({"kind": "jpeg"}, b"\xff\xd8truncated")
 
     def test_image_content_and_relinked_menu_are_monitored(self):
         png = {"kind": "png"}
         self.assertNotEqual(watch.fingerprint(png, b"\x89PNG\r\n\x1a\nold"),
                             watch.fingerprint(png, b"\x89PNG\r\n\x1a\nnew"))
+        jpeg = {"kind": "jpeg"}
+        self.assertNotEqual(watch.fingerprint(jpeg, b"\xff\xd8old\xff\xd9"),
+                            watch.fingerprint(jpeg, b"\xff\xd8new\xff\xd9"))
         resource = {**RESOURCE, "asset_path_contains": "/uploads/"}
         old = PAGE + b'<img src="/uploads/old.png">'
         new = PAGE + b'<img src="/uploads/new.png">'

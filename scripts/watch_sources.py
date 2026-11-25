@@ -83,7 +83,7 @@ def validate_config(config):
             url = urlsplit(resource.get("url", ""))
             if url.scheme != "https" or not url.hostname or url.username or url.password or url.fragment:
                 raise ValueError(f"{identity}/{key}: HTTPS source without credentials/fragment required")
-            if resource.get("kind") not in {"html", "png"}:
+            if resource.get("kind") not in {"html", "png", "jpeg"}:
                 raise ValueError(f"{identity}/{key}: unsupported source kind")
             if resource["kind"] == "html" and not resource.get("required_text"):
                 raise ValueError(f"{identity}/{key}: expected page text is required")
@@ -108,6 +108,10 @@ def fetch(resource, config):
 
 
 def fingerprint(resource, raw):
+    if resource["kind"] == "jpeg":
+        if not raw.startswith(b"\xff\xd8") or not raw.endswith(b"\xff\xd9"):
+            raise ValueError("Expected complete JPEG menu image, not an error page")
+        return sha256(raw).hexdigest()
     if resource["kind"] == "png":
         if not raw.startswith(b"\x89PNG\r\n\x1a\n"):
             raise ValueError("Expected PNG menu image, not an error page")

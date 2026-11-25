@@ -15,43 +15,43 @@
       "area": "Cole Harbour",
       "address": "942 Cole Harbour Road, Dartmouth, NS B2V 1E6",
       "phone": "9024346402",
-      "menu_url": "https://palladium-family-restaurant.popmenu.com/items/clams-and-chips",
-      "source_parent_url": "https://palladiumfamily.ca/our-menu/",
-      "evidence_url": null,
+      "menu_url": "https://palladiumfamily.ca/our-menu/",
+      "source_parent_url": null,
+      "evidence_url": "https://palladiumfamily.ca/wp-content/uploads/2026/07/main-menu_Page_2.jpg",
       "source_id": "palladium",
       "reviewed_at": "2026-11-25",
       "source_published_at": null,
-      "channel": "Restaurant-linked takeout menu",
+      "channel": "Restaurant main menu image",
       "week": [
         [
-          585,
-          1125
+          540,
+          1140
         ],
         [],
         [
-          660,
+          600,
           1200
         ],
         [
-          660,
+          600,
           1200
         ],
         [
-          660,
+          600,
           1200
         ],
         [
-          660,
+          600,
           1200
         ],
         [
-          585,
-          1185
+          540,
+          1200
         ]
       ],
-      "hours_source": "https://palladium-family-restaurant.popmenu.com/items/clams-and-chips",
+      "hours_source": "https://palladiumfamily.ca/",
       "hours_kind": "Published restaurant hours; kitchen/pickup cutoff unverified",
-      "notes": "Takeout menu linked by the restaurant website."
+      "notes": "The restaurant’s main menu lists market-based pricing. Confirm the current price and ordering channel directly."
     },
     {
       "id": "mic-mac",
@@ -397,7 +397,7 @@
       "name": "Clams & Chips",
       "type": "whole",
       "dish": "meal",
-      "cents": 3300,
+      "cents": null,
       "portion": "Not stated",
       "includes": [
         "Fries",
@@ -405,7 +405,7 @@
       ],
       "availability": "Not stated; confirm before travelling.",
       "tax_included": null,
-      "price_note": "Published CAD price · tax inclusion not stated",
+      "price_note": "Market price · tax inclusion not stated",
       "notes": ""
     },
     {

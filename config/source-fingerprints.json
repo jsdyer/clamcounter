@@ -4,9 +4,17 @@
     "palladium": {
       "reviewed_at": "2026-11-25",
       "resources": {
-        "menu": {
-          "sha256": "a33086c2e0e3dbe52d71002ad09ca936ab48b033b2a7552612f2ad8b8770c262",
-          "definition_sha256": "1005aacc4b146ec27a3a9eb3737c6bce863add522b77fa48dbd9c00de881772a"
+        "menu-links": {
+          "sha256": "028837225a8d199500ade1517f5c7266eb5fa1e0b1a2d9c79d92386e6a5cabdb",
+          "definition_sha256": "5e64abd7eb9df20c384f651c959218fe943df8f5267fd5ebdd2a03775722266e"
+        },
+        "menu-image": {
+          "sha256": "2e54d3eb4b4987ab49a36e1639a3376d75d76910083fea2a9c867239a12d3911",
+          "definition_sha256": "4b4038f17ed5cb05362d405c636c37f0dba08c16f814deb4d91fe4035d8a9a87"
+        },
+        "hours": {
+          "sha256": "921c06bc7aa3e1e017bd92bb8265cf6e778fd52a16129e48c32c3f6b3c09bac4",
+          "definition_sha256": "158abb7c0cca60d08bfae8a41c9bf31cc82a3bc13130fd2ed4053bb291d80ab0"
         }
       }
     },

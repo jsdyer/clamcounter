@@ -32,7 +32,8 @@
             "source_count"
           ],
           "unit": "restaurants"
-        }
+        },
+        "precision": "minute"
       }
     ]
   }

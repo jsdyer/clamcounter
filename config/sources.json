@@ -8,22 +8,37 @@
       "name": "Palladium Family Restaurant",
       "resources": [
         {
-          "id": "menu",
-          "url": "https://palladium-family-restaurant.popmenu.com/items/clams-and-chips",
+          "id": "menu-links",
+          "url": "https://palladiumfamily.ca/our-menu/",
           "kind": "html",
           "required_text": [
-            "clams & chips",
-            "whole fresh clams"
+            "our menu",
+            "942 Cole Harbour"
+          ],
+          "asset_path_contains": "/main-menu_Page_"
+        },
+        {
+          "id": "menu-image",
+          "url": "https://palladiumfamily.ca/wp-content/uploads/2026/07/main-menu_Page_2.jpg",
+          "kind": "jpeg"
+        },
+        {
+          "id": "hours",
+          "url": "https://palladiumfamily.ca/",
+          "kind": "html",
+          "required_text": [
+            "hours of operation",
+            "942 Cole Harbour"
           ],
           "sections": [
             {
-              "start": "seafood entrees - main menu",
-              "end": "have you tried this item?"
+              "start": "hours of operation",
+              "end": "find us"
             }
           ]
         }
       ],
-      "coverage_note": "Menu monitored; rendered hours require manual review."
+      "coverage_note": "Restaurant main menu image, current linked main-menu images and published restaurant hours. Market price; confirm by phone."
     },
     {
       "id": "mic-mac",

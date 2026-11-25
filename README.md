@@ -14,11 +14,13 @@ The first manual review covers **9 restaurants and 11 dishes**, observed **2026-
 | Bluenose II | $24.50; menu being updated | [Restaurant menu](https://bluenoseii.ca/menu/) |
 | Fredie's | $28.99 | [Restaurant menu](https://frediesfantasticfish.ca/menu/) |
 | Mic Mac | Market price; when available | [Restaurant menu](https://micmacbarandgrill.com/menus/food/) |
-| Palladium | $33.00 | [Restaurant-linked takeout menu](https://palladium-family-restaurant.popmenu.com/items/clams-and-chips) |
+| Palladium | Market price | [Restaurant main menu image](https://palladiumfamily.ca/our-menu/) |
 | Pleasant St. Diner | $33.00; seasonal | [Restaurant menu and image](https://pleasantstdiner.com/wp/menu/) |
 | Sydelle's | $28.95 | [Restaurant menu](https://sydelles.ca/MENU/) |
 | Tasty Pizza | $14.95; two cups of clams | [Restaurant ordering menu](https://tastypizza.ca/menu/seafood) |
 | Uncle Buck's | $18.99; half-pound clam meal | [Restaurant seafood menu](https://www.unclebuckspizza.com/seafood/) |
+
+Palladium’s restaurant main menu states market-based pricing. Its separate Popmenu takeout page previously displayed $33, but that is a different channel and is not used in the comparison. The restaurant-owned menu images and hours page provide the monitored evidence.
 
 These are published observations, not quotes for today's service. Bluenose explicitly says its printed restaurant prices prevail. The site does not promise stock or that a restaurant is currently open. Listed hours use `America/Halifax`, support closing after midnight, and exclude the exact closing time. Restaurant hours may differ from kitchen, takeout and holiday hours; the recorded channel is shown beside the source.
 

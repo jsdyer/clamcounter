@@ -41,7 +41,7 @@ test('coverage and filters expand beyond the starter collection without inferenc
  assert.ok(items.every(i=>i.channel));
 });
 test('saved observations retain their own prices, dates and unknown values',()=>{
- const original={schema:'clamcounter.comparison.v1',saved_at:'2026-11-25T02:00:00Z',qty:2,tax:true,items:[{...items[0],cents:1234,reviewed_at:'2026-01-01'},items.find(i=>i.cents===null)]};
+ const original={schema:'clamcounter.comparison.v1',saved_at:'2026-11-25T02:00:00Z',qty:2,tax:true,items:[{...items[0],cents:1234,reviewed_at:'2026-01-01'},items.find(i=>i.cents===null&&i.id!==items[0].id)]};
  const saved=validateSaved(original);assert.equal(saved.items[0].cents,1234);assert.equal(saved.items[0].reviewed_at,'2026-01-01');assert.equal(saved.items[1].cents,null);assert.equal(saved.items[0].week,null);assert.equal(saved.items[0].origin,'saved');
  assert.throws(()=>validateSaved({...original,items:Array(9).fill(items[0])}));
  assert.throws(()=>validateSaved({...original,qty:0}));
