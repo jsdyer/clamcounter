@@ -1,7 +1,32 @@
-// Keep transformations separate from the DOM so they can be tested directly.
-export function cleanLines(text) {
-  if (typeof text !== 'string') throw new TypeError('Expected text');
-  const lines = text.split(/\r\n|\r|\n/).map(line => line.trim()).filter(Boolean);
-  const unique = [...new Set(lines)];
-  return { text: unique.join('\n'), count: unique.length, removed: lines.length - unique.length };
+export const money=c=>c===null?'Ask for price':new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(c/100);
+export const types={whole:'Whole clams stated',strips:'Clam strips stated',unspecified:'Type not stated'};
+export const dishes={meal:'Clams & chips','clams-only':'Clams only',platter:'Mixed platter'};
+export const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+export function validDate(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;const d=new Date(s+'T12:00:00Z');return Number.isFinite(+d)&&d.toISOString().slice(0,10)===s;}
+export function localNow(now=new Date()){const p=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'America/Halifax',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(p=>[p.type,p.value]));return {date:`${p.year}-${p.month}-${p.day}`,time:`${p.hour}:${p.minute}`};}
+export function clock(m){const h=Math.floor(m/60)%24;return `${h%12||12}${m%60?':'+String(m%60).padStart(2,'0'):''} ${h<12?'a.m.':'p.m.'}`;}
+export function schedule(week,date,time){
+  if(!validDate(date)||!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(time))return {state:'invalid',text:'Choose a valid Halifax date and time.'};
+  if(!week)return {state:'unknown',text:'Hours not recorded; check the restaurant.'};
+  const d=new Date(date+'T12:00:00Z').getUTCDay(),n=Number(time.slice(0,2))*60+Number(time.slice(3)),today=week[d],yesterday=week[(d+6)%7];
+  if(yesterday&&yesterday[1]>1440&&n+1440<yesterday[1])return {state:'listed',text:`Within ${days[(d+6)%7]} listed hours, until ${clock(yesterday[1])}.`};
+  if(today&&n>=today[0]&&n<today[1])return {state:'listed',text:`Within ${days[d]} listed hours, until ${clock(today[1])}.`};
+  if(today===null||today===undefined)return {state:'unknown',text:'Hours for this day are not recorded; check the restaurant.'};
+  return {state:'outside',text:'Outside the recorded hours. Confirm special hours directly.'};
 }
+export function quote(cents,qty=1,tax=false){if(!(cents===null||(Number.isSafeInteger(cents)&&cents>=0&&cents<=1000000))||!Number.isInteger(qty)||qty<1||qty>20||typeof tax!=='boolean')throw new Error('Choose 1–20 dishes and a valid price.');if(cents===null)return {subtotal:null,hst:null,total:null};const subtotal=cents*qty,hst=Math.round(subtotal*14/100);return {subtotal,hst:tax?hst:0,total:subtotal+(tax?hst:0)};}
+export function parsePrice(value){if(!/^(?:0|[1-9]\d{0,3})(?:\.\d{1,2})?$/.test(String(value).trim()))throw new Error('Enter a price from 0 to 9999.99 with at most two decimals.');const [a,b='']=String(value).trim().split('.');return Number(a)*100+Number(b.padEnd(2,'0'));}
+export function safeURL(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}}
+export function rows(c){const shops=new Map(c.restaurants.map(s=>[s.id,s]));return c.items.map(item=>{const s=shops.get(item.restaurant_id);if(!s)throw new Error('Menu item has no restaurant.');return {...item,restaurant:s.name,area:s.area,address:s.address,phone:s.phone,channel:s.channel,menu_url:s.menu_url,source_id:s.source_id,reviewed_at:s.reviewed_at,week:s.week||null,hours_source:s.hours_source||'',hours_kind:s.hours_kind||'',menu_notes:s.notes||'',origin:'catalogue'};});}
+const fold=s=>String(s).normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
+export function filterRows(items,f={},favorites=new Set()){const q=fold(f.q||'');return items.filter(i=>(!q||fold([i.restaurant,i.area,i.address,i.name,i.portion,...i.includes,types[i.type]].join(' ')).includes(q))&&(!f.area||i.area===f.area)&&(!f.type||i.type===f.type)&&(!f.dish||i.dish===f.dish)&&(!f.favorites||favorites.has(i.restaurant_id))&&(!f.priced||i.cents!==null)).sort((a,b)=>f.sort==='price'?(a.cents??Infinity)-(b.cents??Infinity)||a.restaurant.localeCompare(b.restaurant):a.restaurant.localeCompare(b.restaurant)||a.name.localeCompare(b.name));}
+export function reviewAge(date,now=new Date()){if(!validDate(date))return null;return Math.max(0,Math.floor((Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate())-Date.parse(date+'T00:00:00Z'))/86400000));}
+export function monitorSummary(status){if(!status||!Array.isArray(status.sources)||!status.sources.length)throw new Error('Source-check status is unavailable.');let ok=0,changed=0,failed=0;for(const source of status.sources){if(source.status==='ok')ok++;else if(source.status==='needs_review'){ok++;changed++;}else failed++;}return {ok,changed,failed};}
+function plain(v,max=500){if(typeof v!=='string'||v.length>max)throw new Error('Invalid saved text.');return v;}
+export function validateSaved(data){
+ if(!data||data.schema!=='clamcounter.comparison.v1'||!Array.isArray(data.items)||data.items.length<1||data.items.length>8)throw new Error('Choose a Clam Counter comparison with 1–8 dishes.');quote(0,data.qty,data.tax);
+ if(typeof data.saved_at!=='string'||!Number.isFinite(Date.parse(data.saved_at)))throw new Error('Invalid saved date.');const seen=new Set();
+ const items=data.items.map(i=>{if(!i||!Object.hasOwn(types,i.type)||!Object.hasOwn(dishes,i.dish))throw new Error('Invalid dish category.');quote(i.cents,1,false);const id=plain(i.id,100);if(seen.has(id))throw new Error('Duplicate saved dish.');seen.add(id);if(!Array.isArray(i.includes)||i.includes.length>15)throw new Error('Invalid sides.');if(!validDate(i.reviewed_at))throw new Error('Invalid review date.');const r={};for(const k of ['restaurant','restaurant_id','area','address','name','portion','notes','price_note','availability','menu_notes'])r[k]=plain(i[k]||'');return {...r,id,type:i.type,dish:i.dish,cents:i.cents,includes:i.includes.map(x=>plain(x,100)),reviewed_at:i.reviewed_at,menu_url:safeURL(i.menu_url),source_id:'',week:null,hours_source:'',origin:'saved',original_origin:i.origin==='personal'||i.original_origin==='personal'?'personal':'catalogue'};});return {schema:data.schema,saved_at:data.saved_at,qty:data.qty,tax:data.tax,items};
+}
+function csvCell(v){let s=String(v??'');if(/^(?:\s*[=+@\-]|[\t\r\n])/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
+export function comparisonCSV(items,qty,tax){const r=[['Restaurant','Dish','Clam type','Portion description','Included','Quantity','Listed unit CAD','Subtotal CAD','Estimated HST CAD','Total CAD','Price reviewed','Menu source','Record origin']];for(const i of items){const q=quote(i.cents,qty,tax);r.push([i.restaurant,i.name,types[i.type],i.portion,i.includes.join('; '),qty,i.cents===null?'':(i.cents/100).toFixed(2),q.subtotal===null?'':(q.subtotal/100).toFixed(2),q.hst===null?'':(q.hst/100).toFixed(2),q.total===null?'':(q.total/100).toFixed(2),i.reviewed_at,i.menu_url,i.origin]);}return r.map(row=>row.map(csvCell).join(',')).join('\r\n')+'\r\n';}

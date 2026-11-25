@@ -1,34 +1,99 @@
-name: Browser tool · Check and publish
+name: Clam Counter · Review sources and publish
 on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    - cron: '47 11 * * 2'
   workflow_dispatch:
+concurrency:
+  group: clamcounter-publication
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
+    permissions:
+      contents: write
     outputs:
       publish: ${{ steps.identity.outputs.publish }}
+      source_failed: ${{ steps.source_check.outputs.source_failed }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
-          persist-credentials: false
+          persist-credentials: ${{ github.event_name != 'pull_request' }}
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
+      - name: Validate source configuration
+        run: python3 scripts/watch_sources.py --validate
+      - name: Check published menu sources
+        id: source_check
+        if: github.event_name != 'pull_request'
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          path = Path('web/data/status.json')
+          before = path.stat() if path.exists() else None
+          started = datetime.now(timezone.utc).replace(microsecond=0)
+          result = subprocess.run(['python3', 'scripts/watch_sources.py'])
+          if result.returncode not in (0, 1):
+              raise SystemExit('Fatal monitor/configuration error; publication is blocked')
+          try:
+              after = path.stat()
+              if before and (before.st_ino, before.st_mtime_ns) == (after.st_ino, after.st_mtime_ns):
+                  raise ValueError('Monitor did not replace the status file during this run')
+              status = json.loads(path.read_text())
+              sources = status['sources']
+              configured = json.load(open('config/sources.json'))['sources']
+              expected = {source['id']: {resource['id'] for resource in source['resources']} for source in configured}
+              actual = {source['id']: {resource['id'] for resource in source['resources']} for source in sources}
+              if status['schema_version'] != 1 or actual != expected or status['source_count'] != len(expected) or len(sources) != len(expected):
+                  raise ValueError('Incomplete source-status coverage')
+              attempted = datetime.fromisoformat(status['attempted_at'].replace('Z', '+00:00'))
+              if attempted < started or any(source['attempted_at'] != status['attempted_at'] for source in sources):
+                  raise ValueError('Status is not from this monitor run')
+              allowed = {'ok', 'needs_review', 'error'}
+              if status['status'] not in allowed or any(source['status'] not in allowed for source in sources):
+                  raise ValueError('Invalid source status')
+              has_error = any(source['status'] == 'error' for source in sources)
+              if (result.returncode == 1) != has_error or (status['status'] == 'error') != has_error:
+                  raise ValueError('Monitor outcome and published status disagree')
+          except Exception as error:
+              raise SystemExit(f'Invalid monitor output; publication is blocked: {error}')
+          # Only validated handled fetch/parse failures may continue to publication.
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'source_failed={str(result.returncode == 1).lower()}\n')
+          raise SystemExit(result.returncode)
+          PY
+      - name: Block publication after a fatal monitor failure
+        if: github.event_name != 'pull_request' && steps.source_check.outcome == 'failure' && steps.source_check.outputs.source_failed != 'true'
+        run: |
+          echo 'Source monitoring did not produce a valid current error report. Keeping the previous deployment.'
+          exit 1
+      - name: Save source check report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: source-check-report
+          path: web/data/status.json
+          retention-days: 30
       - name: Test the application
         run: node --test tests/*.test.mjs
-      - name: Test the builder
+      - name: Test source monitoring and build validation
         run: python3 -m unittest discover -s tests -v
       - name: Build the static application
         run: python3 scripts/build.py
-      - name: Check whether the tool has been initialized
+      - name: Check initialized identity
         id: identity
         env:
           REPOSITORY_NAME: ${{ github.event.repository.name }}
@@ -36,25 +101,36 @@ jobs:
           python3 - <<'PY'
           import json, os
           tool_id = json.load(open('tool.json'))['id']
-          ready = tool_id != 'coolcode-tool-template' and tool_id == os.environ['REPOSITORY_NAME']
+          ready = tool_id == 'clamcounter' and tool_id == os.environ['REPOSITORY_NAME']
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
               output.write(f'publish={str(ready).lower()}\n')
           PY
       - name: Install browser test dependencies
         run: |
           python3 -m pip install -r tests/browser-requirements.txt
-          python3 -m playwright install --with-deps chromium
+          echo "CHROMIUM_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          google-chrome --version
       - name: Check application in a browser
         run: python3 tests/browser_smoke.py
+      - name: Save validated source check status
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          git add web/data/status.json
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Record menu source checks without changing reviewed prices'
+            git push origin HEAD:main
+          fi
       - name: Save browser screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: browser-checks
           path: browser-checks/
           retention-days: 7
       - name: Save reviewable site
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: browser-tool-preview
           path: dist/
@@ -68,7 +144,7 @@ jobs:
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.build.outputs.publish == 'true'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
       group: github-pages
@@ -80,5 +156,20 @@ jobs:
       name: github-pages
       url: ${{ steps.publish.outputs.page_url }}
     steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+        with:
+          enablement: true
       - uses: actions/deploy-pages@v5
         id: publish
+  report-source-errors:
+    needs: [build, deploy]
+    if: always() && needs.build.outputs.source_failed == 'true' && needs.deploy.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      - name: Report source failures after publishing their status
+        run: |
+          echo '::error::The source checks reported failures. Their current error status was published successfully; reviewed menu prices remain unchanged. Review the source-check-report artifact and source-check logs.'
+          exit 1

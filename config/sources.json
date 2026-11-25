@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "timeout_seconds": 30,
+  "maximum_download_bytes": 5000000,
+  "sources": [
+    {
+      "id": "palladium",
+      "name": "Palladium Family Restaurant",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://palladium-family-restaurant.popmenu.com/items/clams-and-chips",
+          "kind": "html",
+          "required_text": [
+            "clams & chips",
+            "whole fresh clams"
+          ],
+          "sections": [
+            {
+              "start": "seafood entrees - main menu",
+              "end": "have you tried this item?"
+            }
+          ]
+        }
+      ],
+      "coverage_note": "Menu monitored; rendered hours require manual review."
+    },
+    {
+      "id": "mic-mac",
+      "name": "Mic Mac Bar & Grill",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://micmacbarandgrill.com/menus/food/",
+          "kind": "html",
+          "required_text": [
+            "clams & chips",
+            "clams only when available"
+          ],
+          "sections": [
+            {
+              "start": "clams & chips",
+              "end": "chicken chicken burger"
+            }
+          ]
+        },
+        {
+          "id": "hours",
+          "url": "https://micmacbarandgrill.com/contact-us/",
+          "kind": "html",
+          "required_text": [
+            "hours of operation",
+            "219 waverley"
+          ],
+          "sections": [
+            {
+              "start": "hours of operation",
+              "end": "upcoming:"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fredies",
+      "name": "Fredie's Fantastic Fish House",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://frediesfantasticfish.ca/menu/",
+          "kind": "html",
+          "required_text": [
+            "clams & chips",
+            "fredie's"
+          ],
+          "sections": [
+            {
+              "start": "clams & chips",
+              "end": "lobster roll & chips"
+            },
+            {
+              "start": "super sides & extras",
+              "end": "kid's menu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bluenose-ii",
+      "name": "Bluenose II Restaurant",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://bluenoseii.ca/menu/",
+          "kind": "html",
+          "required_text": [
+            "clams & chips",
+            "operating hours"
+          ],
+          "sections": [
+            {
+              "start": "clams & chips",
+              "end": "house specialty fish & chips"
+            },
+            {
+              "start": "operating hours",
+              "end": "wheelchair friendly"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pleasant-st",
+      "name": "Pleasant St. Diner",
+      "resources": [
+        {
+          "id": "menu-links",
+          "url": "https://pleasantstdiner.com/wp/menu/",
+          "kind": "html",
+          "required_text": [
+            "take out",
+            "dine in"
+          ],
+          "asset_path_contains": "/wp-content/uploads/"
+        },
+        {
+          "id": "menu-image",
+          "url": "https://pleasantstdiner.com/wp/wp-content/uploads/2026/10/1.png",
+          "kind": "png"
+        },
+        {
+          "id": "hours",
+          "url": "https://pleasantstdiner.com/wp/contact/",
+          "kind": "html",
+          "required_text": [
+            "205 pleasant street",
+            "take out"
+          ],
+          "sections": [
+            {
+              "start": "take out",
+              "end": "copyright"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tasty-pizza",
+      "name": "Tasty Pizza",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://tastypizza.ca/menu/seafood",
+          "kind": "html",
+          "required_text": [
+            "clams & chips",
+            "760 main st."
+          ],
+          "sections": [
+            {
+              "start": "clams & chips",
+              "end": "shrimp & chips"
+            },
+            {
+              "start": "760 main st.",
+              "end": "menu deals build a pizza"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sydelles",
+      "name": "Sydelle's Fish and Chips",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://sydelles.ca/MENU/",
+          "kind": "html",
+          "required_text": [
+            "clams & chips",
+            "225 cobequid"
+          ],
+          "sections": [
+            {
+              "start": "clams & chips",
+              "end": "half & half"
+            }
+          ],
+          "user_agent": null
+        },
+        {
+          "id": "hours",
+          "url": "https://sydelles.ca/contact-us/",
+          "kind": "html",
+          "required_text": [
+            "opening hours",
+            "225 cobequid"
+          ],
+          "sections": [
+            {
+              "start": "opening hours",
+              "end": "email sydellesfishandchips"
+            }
+          ],
+          "user_agent": null
+        }
+      ]
+    },
+    {
+      "id": "acadian",
+      "name": "Acadian Fish & Chips and Enzo Pizzeria",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://www.acadianenzo.com/menu",
+          "kind": "html",
+          "required_text": [
+            "clams & chips",
+            "902-475-7000"
+          ],
+          "sections": [
+            {
+              "start": "clams & chips",
+              "end": "scallops & chips"
+            }
+          ]
+        },
+        {
+          "id": "hours",
+          "url": "https://www.acadianenzo.com/",
+          "kind": "html",
+          "required_text": [
+            "our hours",
+            "dine in or take out."
+          ],
+          "sections": [
+            {
+              "start": "our hours",
+              "end": "submit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uncle-bucks",
+      "name": "Uncle Buck's",
+      "resources": [
+        {
+          "id": "menu",
+          "url": "https://www.unclebuckspizza.com/seafood/",
+          "kind": "html",
+          "required_text": [
+            "fresh clams",
+            "*when available"
+          ],
+          "sections": [
+            {
+              "start": "*1/2 lb. fresh clams",
+              "end": "site map"
+            }
+          ]
+        }
+      ],
+      "coverage_note": "Seafood menu monitored; opening hours are not monitored here."
+    }
+  ]
+}

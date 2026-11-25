@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-25",
+  "currency": "CAD",
+  "tax": {
+    "rate_percent": 14,
+    "default_enabled": false,
+    "source": "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html",
+    "reviewed_at": "2026-11-25"
+  },
+  "restaurants": [
+    {
+      "id": "palladium",
+      "name": "Palladium Family Restaurant",
+      "area": "Cole Harbour",
+      "address": "942 Cole Harbour Road, Dartmouth, NS B2V 1E6",
+      "phone": "9024346402",
+      "menu_url": "https://palladium-family-restaurant.popmenu.com/items/clams-and-chips",
+      "source_parent_url": "https://palladiumfamily.ca/our-menu/",
+      "evidence_url": null,
+      "source_id": "palladium",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant-linked takeout menu",
+      "week": [
+        [
+          585,
+          1125
+        ],
+        [],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          585,
+          1185
+        ]
+      ],
+      "hours_source": "https://palladium-family-restaurant.popmenu.com/items/clams-and-chips",
+      "hours_kind": "Published restaurant hours; kitchen/pickup cutoff unverified",
+      "notes": "Takeout menu linked by the restaurant website."
+    },
+    {
+      "id": "mic-mac",
+      "name": "Mic Mac Bar & Grill",
+      "area": "Dartmouth",
+      "address": "219 Waverley Road, Dartmouth, NS B2X 2C3",
+      "phone": "9024347600",
+      "menu_url": "https://micmacbarandgrill.com/menus/food/",
+      "source_parent_url": null,
+      "evidence_url": null,
+      "source_id": "mic-mac",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant food menu",
+      "week": [
+        [
+          540,
+          1260
+        ],
+        [
+          960,
+          1260
+        ],
+        [
+          960,
+          1260
+        ],
+        [
+          960,
+          1260
+        ],
+        [
+          600,
+          1260
+        ],
+        [
+          600,
+          1290
+        ],
+        [
+          540,
+          1290
+        ]
+      ],
+      "hours_source": "https://micmacbarandgrill.com/contact-us/",
+      "hours_kind": "Published restaurant hours; kitchen/pickup cutoff unverified",
+      "notes": "Market price must be confirmed with the restaurant."
+    },
+    {
+      "id": "fredies",
+      "name": "Fredie's Fantastic Fish House",
+      "area": "Bayers Lake",
+      "address": "8 Oland Crescent, Halifax, NS B3S 1C6",
+      "phone": "9024503474",
+      "menu_url": "https://frediesfantasticfish.ca/menu/",
+      "source_parent_url": null,
+      "evidence_url": null,
+      "source_id": "fredies",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant online menu",
+      "week": null,
+      "hours_source": "",
+      "hours_kind": "",
+      "notes": "Small tartar sauce, gravy and coleslaw are listed separately; they are not assumed included."
+    },
+    {
+      "id": "bluenose-ii",
+      "name": "Bluenose II Restaurant",
+      "area": "Downtown Halifax",
+      "address": "1824 Hollis Street, Halifax, NS",
+      "phone": "9024255092",
+      "menu_url": "https://bluenoseii.ca/menu/",
+      "source_parent_url": null,
+      "evidence_url": null,
+      "source_id": "bluenose-ii",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant website menu",
+      "week": [
+        [
+          480,
+          1260
+        ],
+        [
+          480,
+          1260
+        ],
+        [
+          480,
+          1260
+        ],
+        [
+          480,
+          1260
+        ],
+        [
+          480,
+          1260
+        ],
+        [
+          480,
+          1260
+        ],
+        [
+          480,
+          1260
+        ]
+      ],
+      "hours_source": "https://bluenoseii.ca/menu/",
+      "hours_kind": "Published restaurant hours; kitchen/pickup cutoff unverified",
+      "notes": "Restaurant says its menu is being updated and hard-copy restaurant prices prevail. Confirm this published price."
+    },
+    {
+      "id": "pleasant-st",
+      "name": "Pleasant St. Diner",
+      "area": "Woodside",
+      "address": "205 Pleasant Street, Woodside Plaza Unit 101, Dartmouth, NS B2Y 3R5",
+      "phone": "9024697770",
+      "menu_url": "https://pleasantstdiner.com/wp/menu/",
+      "source_parent_url": null,
+      "evidence_url": "https://pleasantstdiner.com/wp/wp-content/uploads/2026/10/1.png",
+      "source_id": "pleasant-st",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant menu image",
+      "week": [
+        [],
+        [],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ]
+      ],
+      "hours_source": "https://pleasantstdiner.com/wp/contact/",
+      "hours_kind": "Takeout hours",
+      "notes": "These are takeout hours. Published dine-in service ends at 7 p.m."
+    },
+    {
+      "id": "tasty-pizza",
+      "name": "Tasty Pizza",
+      "area": "Dartmouth Main Street",
+      "address": "760 Main Street, Dartmouth, NS B2W 3T8",
+      "phone": "9024355700",
+      "menu_url": "https://tastypizza.ca/menu/seafood",
+      "source_parent_url": null,
+      "evidence_url": null,
+      "source_id": "tasty-pizza",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant online ordering menu",
+      "week": [
+        [
+          840,
+          1320
+        ],
+        [
+          660,
+          1380
+        ],
+        [
+          660,
+          1380
+        ],
+        [
+          660,
+          1380
+        ],
+        [
+          660,
+          1380
+        ],
+        [
+          660,
+          1500
+        ],
+        [
+          660,
+          1440
+        ]
+      ],
+      "hours_source": "https://tastypizza.ca/menu/seafood",
+      "hours_kind": "Published restaurant hours; kitchen/pickup cutoff unverified",
+      "notes": "Two cups is the menu’s own portion description, not a verified weight. Coleslaw is listed separately."
+    },
+    {
+      "id": "sydelles",
+      "name": "Sydelle's Fish and Chips",
+      "area": "Lower Sackville",
+      "address": "225 Cobequid Road, Lower Sackville, NS B4C 3J7",
+      "phone": "9028691519",
+      "menu_url": "https://sydelles.ca/MENU/",
+      "source_parent_url": null,
+      "evidence_url": null,
+      "source_id": "sydelles",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant website menu",
+      "week": [
+        [
+          660,
+          1140
+        ],
+        [],
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ]
+      ],
+      "hours_source": "https://sydelles.ca/contact-us/",
+      "hours_kind": "Published restaurant hours; kitchen/pickup cutoff unverified",
+      "notes": "The menu does not specify clam type or clam weight."
+    },
+    {
+      "id": "acadian",
+      "name": "Acadian Fish & Chips and Enzo Pizzeria",
+      "area": "Hammonds Plains",
+      "address": "1990 Hammonds Plains Road, Hammonds Plains, NS B4B 1P4",
+      "phone": "9024757000",
+      "menu_url": "https://www.acadianenzo.com/menu",
+      "source_parent_url": null,
+      "evidence_url": null,
+      "source_id": "acadian",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant website menu (dine in or take out)",
+      "week": [
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1140
+        ],
+        [
+          660,
+          1200
+        ],
+        [
+          660,
+          1200
+        ]
+      ],
+      "hours_source": "https://www.acadianenzo.com/",
+      "hours_kind": "Published dine-in/takeout hours",
+      "notes": "The menu does not specify clam type or clam weight."
+    },
+    {
+      "id": "uncle-bucks",
+      "name": "Uncle Buck’s Pizza",
+      "area": "Spryfield",
+      "address": "5 Dentith Road, Halifax, NS B3R 2K8",
+      "phone": "9024773663",
+      "menu_url": "https://www.unclebuckspizza.com/seafood/",
+      "source_id": "uncle-bucks",
+      "reviewed_at": "2026-11-25",
+      "source_published_at": null,
+      "channel": "Restaurant seafood menu",
+      "week": [
+        [
+          660,
+          1500
+        ],
+        [
+          660,
+          1500
+        ],
+        [
+          660,
+          1500
+        ],
+        [
+          660,
+          1500
+        ],
+        [
+          660,
+          1500
+        ],
+        [
+          660,
+          1560
+        ],
+        [
+          660,
+          1560
+        ]
+      ],
+      "hours_source": "https://www.unclebuckspizza.com/seafood/",
+      "hours_kind": "Published restaurant hours; kitchen/pickup cutoff unverified",
+      "notes": "Clams are listed only when available. “Fresh” does not establish whole clams versus strips."
+    }
+  ],
+  "items": [
+    {
+      "id": "palladium-clams-chips",
+      "restaurant_id": "palladium",
+      "name": "Clams & Chips",
+      "type": "whole",
+      "dish": "meal",
+      "cents": 3300,
+      "portion": "Not stated",
+      "includes": [
+        "Fries",
+        "Coleslaw"
+      ],
+      "availability": "Not stated; confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": ""
+    },
+    {
+      "id": "mic-mac-clams-chips",
+      "restaurant_id": "mic-mac",
+      "name": "Clams & Chips",
+      "type": "whole",
+      "dish": "meal",
+      "cents": null,
+      "portion": "Not stated",
+      "includes": [
+        "Hand-cut fries",
+        "Coleslaw",
+        "Homemade tartar sauce"
+      ],
+      "availability": "Only when available.",
+      "tax_included": false,
+      "price_note": "Market price · taxes excluded",
+      "notes": ""
+    },
+    {
+      "id": "fredies-clams-chips",
+      "restaurant_id": "fredies",
+      "name": "Clams & Chips",
+      "type": "unspecified",
+      "dish": "meal",
+      "cents": 2899,
+      "portion": "Not stated",
+      "includes": [
+        "Chips (in item name)"
+      ],
+      "availability": "Not stated; confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": ""
+    },
+    {
+      "id": "bluenose-ii-clams-chips",
+      "restaurant_id": "bluenose-ii",
+      "name": "Clams & Chips",
+      "type": "whole",
+      "dish": "meal",
+      "cents": 2450,
+      "portion": "Not stated",
+      "includes": [
+        "Chips (in item name)",
+        "Coleslaw"
+      ],
+      "availability": "Not stated; confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": ""
+    },
+    {
+      "id": "pleasant-st-clams-chips",
+      "restaurant_id": "pleasant-st",
+      "name": "Clams & Chips",
+      "type": "unspecified",
+      "dish": "meal",
+      "cents": 3300,
+      "portion": "Not stated",
+      "includes": [
+        "French fries",
+        "Coleslaw",
+        "Homemade tartar sauce"
+      ],
+      "availability": "Available when in season.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": ""
+    },
+    {
+      "id": "tasty-pizza-clams-chips",
+      "restaurant_id": "tasty-pizza",
+      "name": "Clams & Chips",
+      "type": "unspecified",
+      "dish": "meal",
+      "cents": 1495,
+      "portion": "Two cups of clams",
+      "includes": [
+        "Chips (in item name)"
+      ],
+      "availability": "Not stated; confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": ""
+    },
+    {
+      "id": "sydelles-clams-chips",
+      "restaurant_id": "sydelles",
+      "name": "Clams & Chips",
+      "type": "unspecified",
+      "dish": "meal",
+      "cents": 2895,
+      "portion": "Not stated",
+      "includes": [
+        "Chips (in item name)"
+      ],
+      "availability": "Not stated; confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": ""
+    },
+    {
+      "id": "acadian-clams-chips",
+      "restaurant_id": "acadian",
+      "name": "Clams & Chips",
+      "type": "unspecified",
+      "dish": "meal",
+      "cents": 2799,
+      "portion": "Not stated",
+      "includes": [
+        "Chips (in item name)"
+      ],
+      "availability": "Not stated; confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": ""
+    },
+    {
+      "id": "uncle-bucks-clams-chips",
+      "restaurant_id": "uncle-bucks",
+      "name": "Fresh Clams ’n’ Chips",
+      "type": "unspecified",
+      "dish": "meal",
+      "cents": 1899,
+      "portion": "1/2 lb. fresh clams",
+      "includes": [
+        "Chips (in item name)"
+      ],
+      "availability": "Clams only when available. Confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": "Weight is the menu description; cooking/weighing method is not stated."
+    },
+    {
+      "id": "uncle-bucks-clams-only",
+      "restaurant_id": "uncle-bucks",
+      "name": "Fresh Clams Only",
+      "type": "unspecified",
+      "dish": "clams-only",
+      "cents": 1599,
+      "portion": "1/2 lb. fresh clams",
+      "includes": [],
+      "availability": "Clams only when available. Confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": "Weight is the menu description; cooking/weighing method is not stated."
+    },
+    {
+      "id": "uncle-bucks-captains-dinner",
+      "restaurant_id": "uncle-bucks",
+      "name": "Captain’s Dinner for 2",
+      "type": "unspecified",
+      "dish": "platter",
+      "cents": 2999,
+      "portion": "4 oz. fresh clams in a mixed seafood dinner for two",
+      "includes": [
+        "3 pieces of fish",
+        "4 oz. scallops",
+        "4 oz. haddock tips",
+        "Fries",
+        "Coleslaw",
+        "1 tartar sauce",
+        "1 gravy"
+      ],
+      "availability": "Clams only when available. Confirm before travelling.",
+      "tax_included": null,
+      "price_note": "Published CAD price · tax inclusion not stated",
+      "notes": "Weight is the menu description; cooking/weighing method is not stated."
+    }
+  ]
+}

@@ -1,34 +1,12 @@
 <!doctype html>
-<html lang="en-CA">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="{{DESCRIPTION}}">
-  <title>{{TITLE}} · CoolCode</title>
-  <link rel="stylesheet" href="./style.css">
-  <script type="module" src="./app.mjs"></script>
-  {{VISIT_COUNTER}}
-</head>
-<body data-tool-id="{{TOOL_ID}}">
-  <a class="skip" href="#main">Skip to content</a>
-  <header><a href="https://coolcode.ca/">← CoolCode.ca</a><a href="{{SOURCE_URL}}">Source &amp; instructions ↗</a></header>
-  <main id="main">
-    <p class="eyebrow">Browser tool starter</p>
-    <h1>{{TITLE}}</h1>
-    <p class="intro">{{DESCRIPTION}}</p>
-    <section aria-labelledby="example-title">
-      <h2 id="example-title">Clean a list</h2>
-      <p>Trim spaces, skip blank lines and remove exact duplicates. Capitalization stays distinct.</p>
-      <div class="panels">
-        <div><label for="input">Your lines</label><textarea id="input" rows="10" maxlength="100000" spellcheck="false" placeholder="Paste one item per line"></textarea></div>
-        <div><label for="output">Cleaned lines</label><textarea id="output" rows="10" readonly spellcheck="false"></textarea></div>
-      </div>
-      <div class="actions"><button id="sample" type="button">Load example</button><button id="clear" type="button">Clear</button><button id="copy" type="button" hidden>Copy result</button></div>
-      <p id="status" role="status" aria-live="polite">Paste a list to begin.</p>
-      <noscript><p>This tool needs JavaScript to process your text. The source is available above.</p></noscript>
-    </section>
-    <aside aria-label="Privacy"><strong>Stays on your device.</strong> The browser processes your text in this tab. Reloading clears it.</aside>
-  </main>
-  <footer>Part of <a href="https://coolcode.ca/">the CoolCode collection</a>. {{ISSUE_LINK}}</footer>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="{{DESCRIPTION}}"><meta name="coolcode:tool" content="{{TOOL_ID}}"><title>Halifax clams and chips menu prices and order comparison · CoolCode</title><link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>{{VISIT_COUNTER}}</head>
+<body><header class="masthead"><a href="https://coolcode.ca/">CoolCode</a><span>Halifax & nearby Nova Scotia</span><a href="#about">About the prices</a></header>
+<main><section class="hero"><div><p class="eyebrow">A useful seafood shortlist</p><h1>{{TITLE}}</h1><p class="lede">Find your next clams & chips. Compare the dish, the portion and your order total.</p><p class="hero-note">Published menu observations, with the source beside every price. A menu listing does not confirm today’s stock.</p></div><aside class="hero-stats"><strong id="coverage">Loading menu observations…</strong><span id="review-date"></span><a href="https://coolcode.ca/donairafterdark/">Looking for donairs?</a></aside></section>
+<section class="control-panel" aria-label="Search menus"><div class="filters"><label class="search">Find a restaurant or place<input id="search" type="search" placeholder="Try Dartmouth or whole clams" autocomplete="off"></label><label>Area<select id="area"><option value="">All areas</option></select></label><label>Clam type<select id="type"><option value="">Any stated type</option><option value="whole">Whole clams stated</option><option value="strips">Strips stated</option><option value="unspecified">Type not stated</option></select></label><label>Dish<select id="dish"><option value="">All clam dishes</option><option value="meal">Clams & chips</option><option value="clams-only">Clams only</option><option value="platter">Mixed platter</option></select></label><label>Sort<select id="sort"><option value="name">Restaurant name</option><option value="price">Listed price, low to high</option></select></label></div>
+<div class="order-settings"><label>Dishes per order<input id="quantity" type="number" min="1" max="20" value="1" step="1"></label><label class="check"><input id="tax" type="checkbox">Add estimated 14% NS HST</label><label class="check"><input id="priced" type="checkbox">Only stated prices</label><label class="check"><input id="favorites" type="checkbox">My favourites</label><button id="reset" class="subtle" type="button">Reset filters</button></div><div class="pickup"><label>Check listed hours for Halifax date<input id="pickup-date" type="date"></label><label>Local time<input id="pickup-time" type="time"></label><span class="small">Regular restaurant hours only. Kitchen, stock and holiday hours can differ.</span></div><p class="small">Totals compare orders, not equal weights. “Small”, “large” and an unweighed portion are not interchangeable. HST assumes listed prices exclude tax; extras, tips and delivery fees are excluded.</p></section>
+<p id="status" class="status" role="status" aria-live="polite">Loading…</p>
+<section class="comparison" aria-labelledby="comparison-title"><div class="section-head"><div><p class="eyebrow">Your shortlist</p><h2 id="comparison-title">Compare selected dishes <span id="selected-count"></span></h2></div><button id="clear-comparison" class="subtle" type="button">Clear comparison</button></div><p id="comparison-note">Choose Compare on up to eight dishes. Add a current phone or counter quote below.</p><div id="comparison-items" class="comparison-grid"></div><div class="actions"><button id="save" type="button">Save on this device</button><button id="load" class="secondary" type="button">Load saved</button><button id="export-json" class="secondary" type="button">Export comparison JSON</button><button id="export-csv" class="secondary" type="button">Export CSV</button><label class="file-button">Import comparison<input id="import" type="file" accept="application/json,.json"></label><button id="forget" class="subtle" type="button">Forget saved data</button></div><p class="small">Saved comparisons preserve the prices and review dates you saw. Loading one does not turn them into current quotes.</p></section>
+<div class="section-head results-heading"><div><p class="eyebrow">Published menus</p><h2 id="results-title">Choose a dish</h2></div><span id="result-count"></span></div><section id="results" class="cards" aria-labelledby="results-title"></section>
+<section class="custom-section"><div><p class="eyebrow">Have a better quote?</p><h2>Add your own comparison</h2><p>A current counter or phone quote can be more useful than an older menu. It stays in this browser unless you save or export it.</p></div><form id="custom-form"><div class="filters"><label>Restaurant or quote label<input id="custom-name" required maxlength="100" placeholder="My current quote"></label><label>Price for one dish, CAD<input id="custom-price" required inputmode="decimal" placeholder="24.50" maxlength="10"></label><label>Portion / included sides<input id="custom-portion" required maxlength="200" placeholder="Whole clams, fries and slaw"></label><label>Clam type<select id="custom-type"><option value="unspecified">Not confirmed</option><option value="whole">Whole clams confirmed</option><option value="strips">Strips confirmed</option></select></label><label>Dish<select id="custom-dish"><option value="meal">Clams & chips</option><option value="clams-only">Clams only</option><option value="platter">Mixed platter</option></select></label></div><button type="submit">Add quote to comparison</button></form></section>
+<section id="about" class="about"><h2>What these prices mean</h2><div class="about-grid"><div><h3>Menu evidence, not live stock</h3><p>Each entry links to a restaurant-owned menu or its linked ordering page. Prices may differ at the counter. Market prices stay unknown. “Fresh clams” alone does not tell us whole clams versus strips.</p><p id="monitor-status"></p></div><div><h3>Fair comparisons</h3><p>We keep published portion descriptions and side dishes as stated. No cost per gram is invented for an unweighed dish. Restaurant hours, where recorded, are regular listed hours—not a booking or holiday-hours check.</p><p>The optional estimate uses <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" rel="noreferrer">Nova Scotia’s 14% HST</a>. Final till rounding and tax treatment may differ.</p></div><div><h3>Your shortlist stays here</h3><p>Searches, favourites and personal quotes are not sent to restaurant sites. Links open the original site only when selected. CoolCode records aggregate page visits; it does not receive your comparison. Use Save or Export deliberately; browser storage can be cleared.</p></div></div></section>
+</main><footer><a href="https://coolcode.ca/">All CoolCode tools</a><a href="{{SOURCE_URL}}">Source & updating this collection</a>{{ISSUE_LINK}}<span>Made for comparing a real order.</span></footer></body></html>

@@ -9,6 +9,7 @@ import tempfile
 from urllib.parse import urlsplit
 
 from search_metadata import add_search_metadata
+from catalogue import load as load_catalogue
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
@@ -44,6 +45,7 @@ def metadata(root=ROOT):
 
 def build(root=ROOT):
     tool = metadata(root)
+    load_catalogue(root)
     output = root / "dist"
     if output.is_symlink():
         raise ValueError("dist must not be a symlink")
@@ -75,7 +77,7 @@ def build(root=ROOT):
             page = page.replace(placeholder, markup if on_coolcode else "")
         if re.search(r"\{\{[A-Z_]+\}\}", page):
             raise ValueError("Unresolved template placeholder in web/index.html")
-        page = add_search_metadata(page, tool)
+        page = add_search_metadata(page, tool, category="LifestyleApplication")
         index.write_text(page, encoding="utf-8")
         (stage / ".nojekyll").touch()
         if output.exists():

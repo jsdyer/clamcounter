@@ -1,16 +1,39 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "clamcounter",
+  "title": "Clam Counter",
+  "description": "Compare Halifax-area clam dishes, published portions and estimated order totals.",
+  "category": "places",
+  "tags": [
+    "clams",
+    "seafood",
+    "Halifax",
+    "Dartmouth",
+    "menus",
+    "food prices"
+  ],
+  "icon": "shopping-basket",
+  "url": "/clamcounter/",
+  "source": "https://github.com/jsdyer/clamcounter",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "mixed",
+    "detail": "Dated restaurant-menu observations with weekly source-change checks; personal quotes and saved comparisons stay in your browser.",
+    "cadence": "Weekly",
+    "probes": [
+      {
+        "label": "Menu sources checked",
+        "url": "https://coolcode.ca/clamcounter/data/status.json",
+        "path": [
+          "checked_at"
+        ],
+        "count_at": {
+          "path": [
+            "source_count"
+          ],
+          "unit": "restaurants"
+        }
+      }
+    ]
   }
 }
