@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Build a browser tool using Python's standard library; no network required."""
+from menu_summary import menu_summary
 from html import escape
 import json
 from pathlib import Path
@@ -45,7 +46,7 @@ def metadata(root=ROOT):
 
 def build(root=ROOT):
     tool = metadata(root)
-    load_catalogue(root)
+    catalogue = load_catalogue(root)
     output = root / "dist"
     if output.is_symlink():
         raise ValueError("dist must not be a symlink")
@@ -75,6 +76,7 @@ def build(root=ROOT):
             if placeholder not in page:
                 raise ValueError(f"Missing template placeholder: {placeholder}")
             page = page.replace(placeholder, markup if on_coolcode else "")
+        page = page.replace("{{MENU_SUMMARY}}", menu_summary(catalogue))
         if re.search(r"\{\{[A-Z_]+\}\}", page):
             raise ValueError("Unresolved template placeholder in web/index.html")
         page = add_search_metadata(page, tool, category="LifestyleApplication")

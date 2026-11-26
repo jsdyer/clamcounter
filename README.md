@@ -6,6 +6,8 @@
 Compare dated restaurant-menu observations by area, explicitly stated clam type, dish and listed price. Keep portion descriptions and included sides visible; an unweighed dish is never converted into a cost per gram. Market prices stay unknown. Enter the number of dishes, optionally estimate Nova Scotia HST, and compare up to eight alternatives, including a current phone or counter quote of your own. Favourites and deliberately saved comparisons stay on your device; JSON import/export preserves the prices and review dates originally saved. The weekly source-change watch checks pages, not current stock or prices. Open each restaurant source before travelling or ordering, especially when it is seasonal, old or flagged as changed.
 <!-- /coolcode:guide -->
 
+The offline build publishes a source-linked menu comparison in the initial HTML from the same reviewed prices as the planner. Each row carries its own review date.
+
 The first manual review covers **9 restaurants and 11 dishes**, observed **2026-11-25 UTC**. Coverage is a starting point, not a list of every restaurant. Unknown type, weight, publication date, stock and tax inclusion remain unknown. “Fresh” or “Digby” alone never becomes a whole-clam claim. Menu age is not replaced by a build or download timestamp.
 
 | Restaurant | Menu observation | Source |
