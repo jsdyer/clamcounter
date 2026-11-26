@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source_count": 9,
-  "attempted_at": "2026-11-25T04:42:18Z",
-  "checked_at": "2026-11-25T04:42:18Z",
+  "attempted_at": "2026-11-26T11:51:37Z",
+  "checked_at": "2026-11-26T11:51:37Z",
   "reviewed_at": "2026-11-25",
   "status": "ok",
   "sources": [
@@ -10,16 +10,16 @@
       "id": "palladium",
       "name": "Palladium Family Restaurant",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu-links",
           "url": "https://palladiumfamily.ca/our-menu/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "028837225a8d199500ade1517f5c7266eb5fa1e0b1a2d9c79d92386e6a5cabdb",
           "definition_sha256": "5e64abd7eb9df20c384f651c959218fe943df8f5267fd5ebdd2a03775722266e"
@@ -27,9 +27,9 @@
         {
           "id": "menu-image",
           "url": "https://palladiumfamily.ca/wp-content/uploads/2026/07/main-menu_Page_2.jpg",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "2e54d3eb4b4987ab49a36e1639a3376d75d76910083fea2a9c867239a12d3911",
           "definition_sha256": "4b4038f17ed5cb05362d405c636c37f0dba08c16f814deb4d91fe4035d8a9a87"
@@ -37,9 +37,9 @@
         {
           "id": "hours",
           "url": "https://palladiumfamily.ca/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "921c06bc7aa3e1e017bd92bb8265cf6e778fd52a16129e48c32c3f6b3c09bac4",
           "definition_sha256": "158abb7c0cca60d08bfae8a41c9bf31cc82a3bc13130fd2ed4053bb291d80ab0"
@@ -50,16 +50,16 @@
       "id": "mic-mac",
       "name": "Mic Mac Bar & Grill",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu",
           "url": "https://micmacbarandgrill.com/menus/food/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "7fa62649e7048ac1a7a68006e160af8fa8829acc2c590023235bba411cef985d",
           "definition_sha256": "ee7012211092d1b45f9737248aded2a324de9c7f35f06613978321a21f122c53"
@@ -67,9 +67,9 @@
         {
           "id": "hours",
           "url": "https://micmacbarandgrill.com/contact-us/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "f4e450967f063a9ea43db54e5761b714cc984d333ddfffe98de6e0582afa15b7",
           "definition_sha256": "9a44a80f4a5285f5c68c5bbdabd38d12c9cb336bd1ce6ee76a62046e147d8396"
@@ -80,16 +80,16 @@
       "id": "fredies",
       "name": "Fredie's Fantastic Fish House",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu",
           "url": "https://frediesfantasticfish.ca/menu/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "6c9209cf188813d66529ce065c8397c6ab578566ade2670f02c9d8896bb7bbc5",
           "definition_sha256": "db92aa0074026e59be711b774110728d1bb16e9f206110cf9feb549d623a7548"
@@ -100,16 +100,16 @@
       "id": "bluenose-ii",
       "name": "Bluenose II Restaurant",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu",
           "url": "https://bluenoseii.ca/menu/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "bf9ec1945cd9d85bd09927cdd7e22682ddb34a53a4331446f3a800a07183264e",
           "definition_sha256": "d5457f1a633729e69c025675a4be6095cdca4df4c06cd1067b973f3529beb883"
@@ -120,16 +120,16 @@
       "id": "pleasant-st",
       "name": "Pleasant St. Diner",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu-links",
           "url": "https://pleasantstdiner.com/wp/menu/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "d9975d4586a0648b861cedb351985842f4b628cbe400fd21f058f6434e9cec4c",
           "definition_sha256": "7c1daeb7f1d974f59fd6a1370942b3eb75aa48698eb6d2f64b435a281293230c"
@@ -137,9 +137,9 @@
         {
           "id": "menu-image",
           "url": "https://pleasantstdiner.com/wp/wp-content/uploads/2026/10/1.png",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "4c3dafb3b66008a520f63f5edb719e95b7531bc32bdf9356f98f951033e90039",
           "definition_sha256": "f0c7c1feac739438366b7179558ab0c042b3d77a511415fe1d0f645b87e95f90"
@@ -147,9 +147,9 @@
         {
           "id": "hours",
           "url": "https://pleasantstdiner.com/wp/contact/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "2015e407356d062129eccb8bc002b990f85a74bc0582f2964b86a29599bca5ef",
           "definition_sha256": "7c81ce5a1c14b11a9610670429b6a3a366bd8b651e35155b1555a5ccab69750c"
@@ -160,16 +160,16 @@
       "id": "tasty-pizza",
       "name": "Tasty Pizza",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu",
           "url": "https://tastypizza.ca/menu/seafood",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "90e59bbecd81c63c140a180c9676b7467d68c2dbdafc97f66c9983f9cabe187c",
           "definition_sha256": "ceb69b8fcf0f781bc6052e697687c35788167802e8f6f359d3d4c230e4c8c444"
@@ -180,16 +180,16 @@
       "id": "sydelles",
       "name": "Sydelle's Fish and Chips",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu",
           "url": "https://sydelles.ca/MENU/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "644bf58429b241dbbd2ba4c0115c8789e11b0195fef56078c2d29bd17ceae6c2",
           "definition_sha256": "f726b2dbe972a9af2868a4fac19d220edc1bdbbb2135762d80376049cea6bfc3"
@@ -197,9 +197,9 @@
         {
           "id": "hours",
           "url": "https://sydelles.ca/contact-us/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "0d9f8547972466ad360ba956a95835b9d48d9328b72e2a6044ff6ea0ed805fe4",
           "definition_sha256": "0bfdfe019e819cdb5f0b8be0206a74674e9bd878bf06d28703a56a8862450bc7"
@@ -210,16 +210,16 @@
       "id": "acadian",
       "name": "Acadian Fish & Chips and Enzo Pizzeria",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu",
           "url": "https://www.acadianenzo.com/menu",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "b7e4d2c6ae5bd45cc31b3276776fbd1450b0261d4de5a343c8248f41bc6c88aa",
           "definition_sha256": "51054549347bcd087ee2f12c5c2f8e53e223e22b6b079063b7012d0a69eb6193"
@@ -227,9 +227,9 @@
         {
           "id": "hours",
           "url": "https://www.acadianenzo.com/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "1154b39711d27156d1a5b44f871da6b5ac61ec132c65cf2e6f46a762ddec0e79",
           "definition_sha256": "5ca30727967ea9682fcc28e1d7041e9931bd9c96fb5e9a3e4fffc012f8450627"
@@ -240,16 +240,16 @@
       "id": "uncle-bucks",
       "name": "Uncle Buck's",
       "reviewed_at": "2026-11-25",
-      "attempted_at": "2026-11-25T04:42:18Z",
-      "checked_at": "2026-11-25T04:42:18Z",
+      "attempted_at": "2026-11-26T11:51:37Z",
+      "checked_at": "2026-11-26T11:51:37Z",
       "status": "ok",
       "resources": [
         {
           "id": "menu",
           "url": "https://www.unclebuckspizza.com/seafood/",
-          "attempted_at": "2026-11-25T04:42:18Z",
+          "attempted_at": "2026-11-26T11:51:37Z",
           "status": "ok",
-          "checked_at": "2026-11-25T04:42:18Z",
+          "checked_at": "2026-11-26T11:51:37Z",
           "attempts": 1,
           "sha256": "18afabb605daf86aa12ceebd00a67e247f0c3dc9ac784181d1c98b46931d150a",
           "definition_sha256": "5494e7b1a9079ead1305be94b7e57a3839fe3357f315ef07778d658336ce49c4"
